@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MindBridge - Teen Mental Health Companion</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Main App Container -->
+    <div id="app">
+        <!-- Navigation -->
+        <nav class="nav" id="navigation">
+            <div class="nav__brand">
+                <h1>🌉 MindBridge</h1>
+            </div>
+            <div class="nav__menu">
+                <button class="nav__item" data-section="home">🏠 Home</button>
+                <button class="nav__item" data-section="chat">💬 Chat</button>
+                <button class="nav__item" data-section="stress">🧘 Stress</button>
+                <button class="nav__item" data-section="academic">📚 Academic</button>
+                <button class="nav__item" data-section="emotions">💭 Emotions</button>
+                <button class="nav__item" data-section="crisis">🆘 Crisis</button>
+                <button class="nav__item" data-section="profile">👤 Profile</button>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main">
+            <!-- Home Section -->
+            <section id="home" class="section active">
+                <div class="hero">
+                    <h2>Welcome back! 👋</h2>
+                    <p>How are you feeling today?</p>
+                </div>
+
+                <!-- Mood Check-in -->
+                <div class="card mood-checkin">
+                    <div class="card__body">
+                        <h3>Quick Mood Check-in</h3>
+                        <div class="mood-options" id="moodOptions"></div>
+                        <button class="btn btn--primary" id="submitMood">Check In</button>
+                    </div>
+                </div>
+
+                <!-- Daily Quote -->
+                <div class="card quote-card">
+                    <div class="card__body">
+                        <h3>Today's Motivation</h3>
+                        <p id="dailyQuote" class="quote-text"></p>
+                    </div>
+                </div>
+
+                <!-- Quick Access -->
+                <div class="card quick-access">
+                    <div class="card__body">
+                        <h3>Quick Access</h3>
+                        <div class="quick-buttons">
+                            <button class="btn btn--outline" data-section="chat">Join Chat</button>
+                            <button class="btn btn--outline" data-section="stress">Breathing Exercise</button>
+                            <button class="btn btn--outline" data-section="emotions">Journal Entry</button>
+                            <button class="btn btn--outline" data-section="crisis">Get Help</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Progress Overview -->
+                <div class="card progress-card">
+                    <div class="card__body">
+                        <h3>Your Progress</h3>
+                        <div class="progress-stats">
+                            <div class="stat">
+                                <span class="stat-number" id="checkInStreak">0</span>
+                                <span class="stat-label">Day Streak</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-number" id="toolsUsed">0</span>
+                                <span class="stat-label">Tools Used</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-number" id="achievementCount">0</span>
+                                <span class="stat-label">Achievements</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Chat Section -->
+            <section id="chat" class="section">
+                <div class="section-header">
+                    <h2>💬 Peer Support</h2>
+                    <p>Connect with other teens in safe, moderated spaces</p>
+                </div>
+                
+                <div id="chatRooms" class="chat-rooms"></div>
+                
+                <!-- Chat Interface -->
+                <div id="chatInterface" class="chat-interface hidden">
+                    <div class="chat-header">
+                        <h3 id="chatRoomName"></h3>
+                        <button class="btn btn--sm btn--outline" id="leaveChatBtn">Leave</button>
+                    </div>
+                    <div class="chat-messages" id="chatMessages"></div>
+                    <div class="chat-input">
+                        <input type="text" placeholder="Type your message..." id="messageInput" class="form-control">
+                        <button class="btn btn--primary" id="sendMessage">Send</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Stress Management Section -->
+            <section id="stress" class="section">
+                <div class="section-header">
+                    <h2>🧘 Stress Management</h2>
+                    <p>Tools to help you manage stress and anxiety</p>
+                </div>
+                
+                <div id="stressTools" class="stress-tools"></div>
+                
+                <!-- Breathing Exercise -->
+                <div id="breathingExercise" class="breathing-exercise hidden">
+                    <div class="breathing-circle" id="breathingCircle">
+                        <div class="breathing-text" id="breathingText">Get Ready</div>
+                    </div>
+                    <div class="breathing-controls">
+                        <button class="btn btn--primary" id="startBreathing">Start</button>
+                        <button class="btn btn--outline" id="stopBreathing">Stop</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Academic Section -->
+            <section id="academic" class="section">
+                <div class="section-header">
+                    <h2>📚 Academic Support</h2>
+                    <p>Manage academic pressure and stay organized</p>
+                </div>
+                
+                <!-- Study Planner -->
+                <div class="card">
+                    <div class="card__body">
+                        <h3>Study Planner</h3>
+                        <div class="form-group">
+                            <input type="text" placeholder="What are you studying?" id="studyTask" class="form-control">
+                            <input type="number" placeholder="Duration (minutes)" id="studyDuration" class="form-control" min="5" max="180">
+                            <button class="btn btn--primary" id="startStudySession">Start Session</button>
+                        </div>
+                        <div id="studyTimer" class="study-timer hidden">
+                            <div class="timer-display" id="timerDisplay">25:00</div>
+                            <button class="btn btn--outline" id="pauseTimer">Pause</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Stress Assessment -->
+                <div class="card">
+                    <div class="card__body">
+                        <h3>Academic Stress Check</h3>
+                        <div class="stress-assessment">
+                            <div class="form-group">
+                                <label class="form-label">How stressed do you feel about school right now?</label>
+                                <input type="range" min="1" max="10" value="5" id="stressLevel" class="stress-slider">
+                                <div class="stress-labels">
+                                    <span>Low</span>
+                                    <span>High</span>
+                                </div>
+                            </div>
+                            <div id="stressAdvice" class="stress-advice"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Emotions Section -->
+            <section id="emotions" class="section">
+                <div class="section-header">
+                    <h2>💭 Emotional Wellness</h2>
+                    <p>Track and understand your emotions</p>
+                </div>
+                
+                <!-- Emotion Wheel -->
+                <div class="card">
+                    <div class="card__body">
+                        <h3>How are you feeling?</h3>
+                        <div id="emotionWheel" class="emotion-wheel"></div>
+                    </div>
+                </div>
+
+                <!-- Journal Entry -->
+                <div class="card">
+                    <div class="card__body">
+                        <h3>Daily Journal</h3>
+                        <div class="form-group">
+                            <textarea placeholder="Write about your day, feelings, or anything on your mind..." id="journalEntry" class="form-control" rows="5"></textarea>
+                            <button class="btn btn--primary" id="saveJournal">Save Entry</button>
+                        </div>
+                        <div id="journalHistory" class="journal-history"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Crisis Section -->
+            <section id="crisis" class="section">
+                <div class="section-header crisis-header">
+                    <h2>🆘 Crisis Support</h2>
+                    <p>Immediate help and resources when you need them most</p>
+                </div>
+                
+                <div class="crisis-warning">
+                    <p><strong>If you're having thoughts of self-harm or suicide, please reach out immediately.</strong></p>
+                </div>
+
+                <div id="crisisResources" class="crisis-resources"></div>
+
+                <!-- Quick Coping Strategies -->
+                <div class="card">
+                    <div class="card__body">
+                        <h3>Quick Coping Strategies</h3>
+                        <div class="coping-strategies">
+                            <button class="btn btn--outline strategy-btn" data-strategy="grounding">5-4-3-2-1 Grounding</button>
+                            <button class="btn btn--outline strategy-btn" data-strategy="breathing">Emergency Breathing</button>
+                            <button class="btn btn--outline strategy-btn" data-strategy="distraction">Distraction Techniques</button>
+                        </div>
+                        <div id="strategyContent" class="strategy-content hidden"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Profile Section -->
+            <section id="profile" class="section">
+                <div class="section-header">
+                    <h2>👤 Your Profile</h2>
+                    <p>Track your progress and achievements</p>
+                </div>
+                
+                <!-- Achievements -->
+                <div class="card">
+                    <div class="card__body">
+                        <h3>Achievements</h3>
+                        <div id="achievementsList" class="achievements-list"></div>
+                    </div>
+                </div>
+
+                <!-- Settings -->
+                <div class="card">
+                    <div class="card__body">
+                        <h3>Settings</h3>
+                        <div class="settings">
+                            <div class="form-group">
+                                <label class="form-label">Theme</label>
+                                <select id="themeSelect" class="form-control">
+                                    <option value="light">Light</option>
+                                    <option value="dark">Dark</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">
+                                    <input type="checkbox" id="notificationsEnabled"> Enable daily check-in reminders
+                                </label>
+                            </div>
+                            <button class="btn btn--outline" id="clearDataBtn">Reset All Data</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
