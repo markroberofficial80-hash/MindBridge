@@ -15,13 +15,12 @@
                 <h1>🌉 MindBridge</h1>
             </div>
             <div class="nav__menu">
-                <button class="nav__item" data-section="home">🏠 Home</button>
-                <button class="nav__item" data-section="chat">💬 Chat</button>
-                <button class="nav__item" data-section="stress">🧘 Stress</button>
-                <button class="nav__item" data-section="academic">📚 Academic</button>
-                <button class="nav__item" data-section="emotions">💭 Emotions</button>
-                <button class="nav__item" data-section="crisis">🆘 Crisis</button>
-                <button class="nav__item" data-section="profile">👤 Profile</button>
+                <button class="nav__item active" data-section="home">🏠 Home</button>
+                <button class="nav__item" data-section="chat">💬 Smart Chat</button>
+                <button class="nav__item" data-section="mood">📊 Mood Tracker</button>
+                <button class="nav__item" data-section="stress">🧘 Stress Tools</button>
+                <button class="nav__item" data-section="academic">📚 Study Support</button>
+                <button class="nav__item" data-section="crisis">🆘 Crisis Help</button>
             </div>
         </nav>
 
@@ -30,81 +29,141 @@
             <!-- Home Section -->
             <section id="home" class="section active">
                 <div class="hero">
-                    <h2>Welcome back! 👋</h2>
-                    <p>How are you feeling today?</p>
+                    <h2>Welcome to MindBridge! 👋</h2>
+                    <p>Your intelligent peer support companion</p>
                 </div>
 
-                <!-- Mood Check-in -->
+                <!-- Quick Mood Check -->
                 <div class="card mood-checkin">
                     <div class="card__body">
-                        <h3>Quick Mood Check-in</h3>
-                        <div class="mood-options" id="moodOptions"></div>
-                        <button class="btn btn--primary" id="submitMood">Check In</button>
+                        <h3>How are you feeling right now?</h3>
+                        <div class="mood-options" id="quickMoodOptions"></div>
+                        <button class="btn btn--primary" id="quickMoodSubmit">Check In</button>
+                        <div id="moodResponse" class="mood-response hidden"></div>
                     </div>
                 </div>
 
-                <!-- Daily Quote -->
-                <div class="card quote-card">
+                <!-- Smart Chat Preview -->
+                <div class="card">
                     <div class="card__body">
-                        <h3>Today's Motivation</h3>
-                        <p id="dailyQuote" class="quote-text"></p>
-                    </div>
-                </div>
-
-                <!-- Quick Access -->
-                <div class="card quick-access">
-                    <div class="card__body">
-                        <h3>Quick Access</h3>
-                        <div class="quick-buttons">
-                            <button class="btn btn--outline" data-section="chat">Join Chat</button>
-                            <button class="btn btn--outline" data-section="stress">Breathing Exercise</button>
-                            <button class="btn btn--outline" data-section="emotions">Journal Entry</button>
-                            <button class="btn btn--outline" data-section="crisis">Get Help</button>
+                        <h3>💬 Quick Chat</h3>
+                        <p>Try our intelligent chat - it actually understands what you're going through!</p>
+                        <div class="demo-chat">
+                            <div class="chat-message user-message">
+                                <div class="message-content">I'm so tired from studying for exams</div>
+                            </div>
+                            <div class="chat-message ai-message">
+                                <div class="message-content">Exam stress is exhausting! Are you getting enough breaks while studying? Try the Pomodoro technique - 25 minutes study, 5 minute break. What subject is giving you the most trouble?</div>
+                            </div>
                         </div>
+                        <button class="btn btn--primary quick-nav-btn" data-section="chat">Start Smart Chat</button>
+                    </div>
+                </div>
+
+                <!-- Daily Tips -->
+                <div class="card">
+                    <div class="card__body">
+                        <h3>💡 Today's Tip</h3>
+                        <p id="dailyTip" class="daily-tip"></p>
                     </div>
                 </div>
 
                 <!-- Progress Overview -->
-                <div class="card progress-card">
+                <div class="card progress-overview">
                     <div class="card__body">
                         <h3>Your Progress</h3>
-                        <div class="progress-stats">
-                            <div class="stat">
-                                <span class="stat-number" id="checkInStreak">0</span>
-                                <span class="stat-label">Day Streak</span>
+                        <div class="progress-grid">
+                            <div class="progress-item">
+                                <div class="progress-number" id="chatInteractions">0</div>
+                                <div class="progress-label">Chat Interactions</div>
                             </div>
-                            <div class="stat">
-                                <span class="stat-number" id="toolsUsed">0</span>
-                                <span class="stat-label">Tools Used</span>
+                            <div class="progress-item">
+                                <div class="progress-number" id="moodCheckins">0</div>
+                                <div class="progress-label">Mood Check-ins</div>
                             </div>
-                            <div class="stat">
-                                <span class="stat-number" id="achievementCount">0</span>
-                                <span class="stat-label">Achievements</span>
+                            <div class="progress-item">
+                                <div class="progress-number" id="toolsUsed">0</div>
+                                <div class="progress-label">Coping Tools Used</div>
                             </div>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <!-- Chat Section -->
+            <!-- Smart Chat Section -->
             <section id="chat" class="section">
                 <div class="section-header">
-                    <h2>💬 Peer Support</h2>
-                    <p>Connect with other teens in safe, moderated spaces</p>
+                    <h2>💬 Intelligent Peer Support Chat</h2>
+                    <p>Chat with AI that understands teens and provides real support</p>
                 </div>
-                
-                <div id="chatRooms" class="chat-rooms"></div>
-                
-                <!-- Chat Interface -->
-                <div id="chatInterface" class="chat-interface hidden">
+
+                <!-- Chat Room Selection -->
+                <div id="chatRoomSelector" class="chat-room-selector">
+                    <h3>Choose Your Support Topic:</h3>
+                    <div class="room-grid" id="roomGrid"></div>
+                </div>
+
+                <!-- Active Chat Interface -->
+                <div id="activeChat" class="active-chat hidden">
                     <div class="chat-header">
-                        <h3 id="chatRoomName"></h3>
-                        <button class="btn btn--sm btn--outline" id="leaveChatBtn">Leave</button>
+                        <div class="chat-info">
+                            <h3 id="activeChatTitle"></h3>
+                            <p id="activeChatDescription"></p>
+                        </div>
+                        <div class="chat-actions">
+                            <button class="btn btn--sm btn--outline" id="changeChatRoom">Change Room</button>
+                            <button class="btn btn--sm btn--outline" id="clearChatHistory">Clear Chat</button>
+                        </div>
                     </div>
-                    <div class="chat-messages" id="chatMessages"></div>
-                    <div class="chat-input">
-                        <input type="text" placeholder="Type your message..." id="messageInput" class="form-control">
-                        <button class="btn btn--primary" id="sendMessage">Send</button>
+                    
+                    <div class="chat-messages" id="chatMessages">
+                        <div class="welcome-message">
+                            <div class="message-content">
+                                <strong>Welcome!</strong> I'm here to listen and support you. Share what's on your mind - I'll do my best to understand and help. 💙
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="chat-input-area">
+                        <div class="input-wrapper">
+                            <textarea 
+                                placeholder="Type your message here... I'm listening and will respond based on what you actually say."
+                                id="messageInput" 
+                                class="form-control chat-textarea"
+                                rows="2"
+                            ></textarea>
+                            <button class="btn btn--primary send-btn" id="sendMessage">
+                                Send
+                            </button>
+                        </div>
+                        <div class="chat-suggestions" id="chatSuggestions"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Mood Tracker Section -->
+            <section id="mood" class="section">
+                <div class="section-header">
+                    <h2>📊 Mood Tracking</h2>
+                    <p>Track your emotional patterns and get personalized insights</p>
+                </div>
+
+                <!-- Detailed Mood Check -->
+                <div class="card">
+                    <div class="card__body">
+                        <h3>Detailed Mood Assessment</h3>
+                        <div id="detailedMoodTracker" class="detailed-mood-tracker"></div>
+                        <button class="btn btn--primary" id="submitDetailedMood">Save Mood Data</button>
+                    </div>
+                </div>
+
+                <!-- Mood History -->
+                <div class="card">
+                    <div class="card__body">
+                        <h3>Mood History</h3>
+                        <div id="moodHistory" class="mood-history">
+                            <p class="no-data">Start tracking your mood to see patterns and insights here!</p>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -112,45 +171,66 @@
             <!-- Stress Management Section -->
             <section id="stress" class="section">
                 <div class="section-header">
-                    <h2>🧘 Stress Management</h2>
-                    <p>Tools to help you manage stress and anxiety</p>
+                    <h2>🧘 Stress Management Tools</h2>
+                    <p>Interactive tools to help you manage stress and anxiety</p>
                 </div>
-                
-                <div id="stressTools" class="stress-tools"></div>
-                
-                <!-- Breathing Exercise -->
-                <div id="breathingExercise" class="breathing-exercise hidden">
-                    <div class="breathing-circle" id="breathingCircle">
-                        <div class="breathing-text" id="breathingText">Get Ready</div>
+
+                <!-- Breathing Exercises -->
+                <div class="card">
+                    <div class="card__body">
+                        <h3>Guided Breathing</h3>
+                        <div class="breathing-controls">
+                            <button class="btn btn--outline" data-exercise="box">Box Breathing (4-4-4-4)</button>
+                            <button class="btn btn--outline" data-exercise="calm">4-7-8 Calming</button>
+                            <button class="btn btn--outline" data-exercise="energy">Energizing Breath</button>
+                        </div>
+                        
+                        <div id="breathingExercise" class="breathing-exercise hidden">
+                            <div class="breathing-circle" id="breathingCircle">
+                                <div class="breathing-text" id="breathingText">Get Ready</div>
+                            </div>
+                            <div class="breathing-controls">
+                                <button class="btn btn--primary" id="startBreathing">Start</button>
+                                <button class="btn btn--outline" id="stopBreathing">Stop</button>
+                            </div>
+                            <div class="breathing-progress">
+                                <div class="progress-bar">
+                                    <div class="progress-fill" id="breathingProgress"></div>
+                                </div>
+                                <div id="breathingStatus">Ready to begin</div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="breathing-controls">
-                        <button class="btn btn--primary" id="startBreathing">Start</button>
-                        <button class="btn btn--outline" id="stopBreathing">Stop</button>
+                </div>
+
+                <!-- Quick Coping Strategies -->
+                <div class="card">
+                    <div class="card__body">
+                        <h3>Quick Coping Strategies</h3>
+                        <div class="coping-grid">
+                            <button class="coping-card" data-strategy="grounding">
+                                <h4>5-4-3-2-1 Grounding</h4>
+                                <p>Reconnect with the present</p>
+                            </button>
+                            <button class="coping-card" data-strategy="progressive">
+                                <h4>Muscle Relaxation</h4>
+                                <p>Release physical tension</p>
+                            </button>
+                            <button class="coping-card" data-strategy="mindful">
+                                <h4>Mindful Observation</h4>
+                                <p>Focus and center yourself</p>
+                            </button>
+                        </div>
+                        <div id="copingInstructions" class="coping-instructions hidden"></div>
                     </div>
                 </div>
             </section>
 
-            <!-- Academic Section -->
+            <!-- Academic Support Section -->
             <section id="academic" class="section">
                 <div class="section-header">
-                    <h2>📚 Academic Support</h2>
-                    <p>Manage academic pressure and stay organized</p>
-                </div>
-                
-                <!-- Study Planner -->
-                <div class="card">
-                    <div class="card__body">
-                        <h3>Study Planner</h3>
-                        <div class="form-group">
-                            <input type="text" placeholder="What are you studying?" id="studyTask" class="form-control">
-                            <input type="number" placeholder="Duration (minutes)" id="studyDuration" class="form-control" min="5" max="180">
-                            <button class="btn btn--primary" id="startStudySession">Start Session</button>
-                        </div>
-                        <div id="studyTimer" class="study-timer hidden">
-                            <div class="timer-display" id="timerDisplay">25:00</div>
-                            <button class="btn btn--outline" id="pauseTimer">Pause</button>
-                        </div>
-                    </div>
+                    <h2>📚 Academic Stress Support</h2>
+                    <p>Tools to manage study stress and stay organized</p>
                 </div>
 
                 <!-- Stress Assessment -->
@@ -158,108 +238,114 @@
                     <div class="card__body">
                         <h3>Academic Stress Check</h3>
                         <div class="stress-assessment">
-                            <div class="form-group">
-                                <label class="form-label">How stressed do you feel about school right now?</label>
-                                <input type="range" min="1" max="10" value="5" id="stressLevel" class="stress-slider">
+                            <label class="form-label">How stressed do you feel about school right now?</label>
+                            <div class="stress-scale">
+                                <input type="range" min="1" max="10" value="5" id="academicStressLevel" class="stress-slider">
                                 <div class="stress-labels">
-                                    <span>Low</span>
-                                    <span>High</span>
+                                    <span>Calm</span>
+                                    <span>Overwhelmed</span>
                                 </div>
                             </div>
-                            <div id="stressAdvice" class="stress-advice"></div>
+                            <div id="stressAdvice" class="stress-advice hidden"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Study Planner -->
+                <div class="card">
+                    <div class="card__body">
+                        <h3>Study Planner</h3>
+                        <div class="planner-input">
+                            <input type="text" placeholder="What do you need to study?" id="studyTask" class="form-control">
+                            <select id="studyDuration" class="form-control">
+                                <option value="15">15 minutes</option>
+                                <option value="25" selected>25 minutes (Pomodoro)</option>
+                                <option value="45">45 minutes</option>
+                                <option value="60">1 hour</option>
+                            </select>
+                            <button class="btn btn--primary" id="startStudySession">Start Session</button>
+                        </div>
+                        
+                        <div id="studyTimer" class="study-timer hidden">
+                            <div class="timer-display">
+                                <h4 id="currentTask"></h4>
+                                <div class="timer-clock" id="timerClock">25:00</div>
+                                <div class="timer-controls">
+                                    <button class="btn btn--outline" id="pauseTimer">Pause</button>
+                                    <button class="btn btn--outline" id="resetTimer">Reset</button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <!-- Emotions Section -->
-            <section id="emotions" class="section">
-                <div class="section-header">
-                    <h2>💭 Emotional Wellness</h2>
-                    <p>Track and understand your emotions</p>
-                </div>
-                
-                <!-- Emotion Wheel -->
-                <div class="card">
-                    <div class="card__body">
-                        <h3>How are you feeling?</h3>
-                        <div id="emotionWheel" class="emotion-wheel"></div>
-                    </div>
-                </div>
-
-                <!-- Journal Entry -->
-                <div class="card">
-                    <div class="card__body">
-                        <h3>Daily Journal</h3>
-                        <div class="form-group">
-                            <textarea placeholder="Write about your day, feelings, or anything on your mind..." id="journalEntry" class="form-control" rows="5"></textarea>
-                            <button class="btn btn--primary" id="saveJournal">Save Entry</button>
-                        </div>
-                        <div id="journalHistory" class="journal-history"></div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Crisis Section -->
+            <!-- Crisis Support Section -->
             <section id="crisis" class="section">
-                <div class="section-header crisis-header">
+                <div class="crisis-header">
                     <h2>🆘 Crisis Support</h2>
-                    <p>Immediate help and resources when you need them most</p>
-                </div>
-                
-                <div class="crisis-warning">
-                    <p><strong>If you're having thoughts of self-harm or suicide, please reach out immediately.</strong></p>
+                    <p><strong>If you're in crisis or having thoughts of self-harm, please reach out immediately. You're not alone.</strong></p>
                 </div>
 
-                <div id="crisisResources" class="crisis-resources"></div>
-
-                <!-- Quick Coping Strategies -->
-                <div class="card">
-                    <div class="card__body">
-                        <h3>Quick Coping Strategies</h3>
-                        <div class="coping-strategies">
-                            <button class="btn btn--outline strategy-btn" data-strategy="grounding">5-4-3-2-1 Grounding</button>
-                            <button class="btn btn--outline strategy-btn" data-strategy="breathing">Emergency Breathing</button>
-                            <button class="btn btn--outline strategy-btn" data-strategy="distraction">Distraction Techniques</button>
+                <!-- Emergency Resources -->
+                <div class="emergency-resources">
+                    <div class="card crisis-card urgent">
+                        <div class="card__body">
+                            <div class="crisis-resource">
+                                <div class="urgent-badge">URGENT - 24/7</div>
+                                <h3>Crisis Text Line</h3>
+                                <div class="crisis-contact">Text HOME to 741741</div>
+                                <p>Free, confidential crisis support via text message</p>
+                            </div>
                         </div>
-                        <div id="strategyContent" class="strategy-content hidden"></div>
                     </div>
-                </div>
-            </section>
 
-            <!-- Profile Section -->
-            <section id="profile" class="section">
-                <div class="section-header">
-                    <h2>👤 Your Profile</h2>
-                    <p>Track your progress and achievements</p>
-                </div>
-                
-                <!-- Achievements -->
-                <div class="card">
-                    <div class="card__body">
-                        <h3>Achievements</h3>
-                        <div id="achievementsList" class="achievements-list"></div>
+                    <div class="card crisis-card urgent">
+                        <div class="card__body">
+                            <div class="crisis-resource">
+                                <div class="urgent-badge">URGENT - 24/7</div>
+                                <h3>National Suicide Prevention Lifeline</h3>
+                                <div class="crisis-contact">Call or text 988</div>
+                                <p>Free, confidential emotional support</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                <!-- Settings -->
+                <!-- Immediate Coping -->
                 <div class="card">
                     <div class="card__body">
-                        <h3>Settings</h3>
-                        <div class="settings">
-                            <div class="form-group">
-                                <label class="form-label">Theme</label>
-                                <select id="themeSelect" class="form-control">
-                                    <option value="light">Light</option>
-                                    <option value="dark">Dark</option>
-                                </select>
+                        <h3>Immediate Coping Strategies</h3>
+                        <div class="crisis-strategies">
+                            <button class="btn btn--primary crisis-strategy" data-strategy="emergency-breathing">
+                                Emergency Breathing
+                            </button>
+                            <button class="btn btn--primary crisis-strategy" data-strategy="grounding-crisis">
+                                Crisis Grounding
+                            </button>
+                            <button class="btn btn--primary crisis-strategy" data-strategy="safety-plan">
+                                Safety Planning
+                            </button>
+                        </div>
+                        <div id="crisisInstructions" class="crisis-instructions hidden"></div>
+                    </div>
+                </div>
+
+                <!-- Additional Resources -->
+                <div class="card">
+                    <div class="card__body">
+                        <h3>Additional Resources</h3>
+                        <div class="resource-list">
+                            <div class="resource-item">
+                                <h4>Teen Line</h4>
+                                <p class="resource-contact">1-800-852-8336 (6pm-10pm PT)</p>
+                                <p>Teens helping teens with peer support</p>
                             </div>
-                            <div class="form-group">
-                                <label class="form-label">
-                                    <input type="checkbox" id="notificationsEnabled"> Enable daily check-in reminders
-                                </label>
+                            <div class="resource-item">
+                                <h4>Trevor Project (LGBTQ+ Youth)</h4>
+                                <p class="resource-contact">1-866-488-7386</p>
+                                <p>Crisis support for LGBTQ+ young people</p>
                             </div>
-                            <button class="btn btn--outline" id="clearDataBtn">Reset All Data</button>
                         </div>
                     </div>
                 </div>
